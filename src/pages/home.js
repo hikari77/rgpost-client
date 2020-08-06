@@ -21,7 +21,7 @@ class home extends Component {
     }
     render() {
         let recentPostsMarkup = this.state.posts ? (
-            this.state.posts.map(post => <Post post={post}/>)
+            this.state.posts.map(post => <Post key={post.postId} post={post} />)
         ) : <p>loading...</p>
         return (
 
