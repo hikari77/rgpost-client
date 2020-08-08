@@ -25,7 +25,7 @@ class signup extends Component {
         super();
         this.state = {
             email: '',
-            password: '',
+            password: '',     
             confirmPassword: '',
             handle: '',
             errors: {}
