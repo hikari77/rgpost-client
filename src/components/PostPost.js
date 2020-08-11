@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 // redex
 import { connect } from 'react-redux';
-import { postPost } from '../redux/actions/dataActions';
+import { postPost, clearErrors } from '../redux/actions/dataActions';
 
 // mui 
 import Button from '@material-ui/core/Button';
@@ -21,15 +21,17 @@ import MyButton from '../util/MyButton';
 const styles = theme => ({
     ...theme.spreadThis,
     submitButton: {
-        position: 'relative'
+        position: 'relative',
+        float: 'right',
+        marginTop: 10
     },
     progressSpinner: {
         position:'absolute'
     },
     closeButton: {
         position: 'absolute',
-        left: '90%',
-        top: '10%'
+        left: '91%',
+        top: '6%'
     }
 
 });
@@ -49,13 +51,13 @@ class PostPost extends Component {
         }
         if(!nextProps.UI.errors && !nextProps.UI.loading) {
             this.setState({ body: '', open: false, errors: {} });
-            this.handleClose();
         }
     }
     handleOpen = () => {
         this.setState({ open: true })
     }
     handleClose = () => {
+        this.props.clearErrors()
         this.setState({ open: false, errors: {} })
     }
     handleSubmit = (event) =>{
@@ -125,7 +127,8 @@ class PostPost extends Component {
 
 PostPost.propTypes = {
     postPost: PropTypes.func.isRequired,
-    UI: PropTypes.object.isRequired
+    UI: PropTypes.object.isRequired,
+    clearErrors: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -133,4 +136,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, { postPost })(withStyles(styles)(PostPost))
+export default connect(mapStateToProps, { postPost, clearErrors })(withStyles(styles)(PostPost))
