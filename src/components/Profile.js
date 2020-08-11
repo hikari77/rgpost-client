@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
+import EditDetails from './EditDetails';
 
 //redux
 import { connect } from 'react-redux';
@@ -21,6 +22,7 @@ import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import EditIcon from '@material-ui/icons/Edit';
+import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 
 
 const styles = (theme) => ({
@@ -84,6 +86,10 @@ class Profile extends Component {
     handleEditPicture = () => {
         const fileInput = document.getElementById('imageInput');
         fileInput.click();
+    }
+
+    handleLogout = () => {
+        this.props.logoutUser();
     }
     render() {
         const {
@@ -149,6 +155,12 @@ class Profile extends Component {
                                 <CalendarToday color="primary"/>{' '}
                                     <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
                             </div>
+                            <Tooltip title="Logout" placement="top">
+                                <IconButton onClick={this.handleLogout}>
+                                    <KeyboardReturn color="primary"/>
+                                </IconButton>
+                            </Tooltip>
+                            <EditDetails/>
                         </div>
                     </Paper>) 
             : (
@@ -182,7 +194,7 @@ const mapActionsToProps = { logoutUser, uploadImage };
 
 Profile.propTypes = {
     user: PropTypes.object.isRequired,
-    clasees: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
     logoutUser: PropTypes.func.isRequired,
     uploadImage: PropTypes.func.isRequired
 }
