@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import LikeButton from './LikeButton';
 import Comments from './Comments';
+import CommentForm from './CommentForm';
 
 // mui
 import Dialog from '@material-ui/core/Dialog';
@@ -22,7 +23,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 
 // redex
 import { connect } from 'react-redux';
-import { getPost } from '../../redux/actions/dataActions';
+import { getPost, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -62,7 +63,8 @@ class PostDialog extends Component {
         this.props.getPost(this.props.postId)
     }
     handleClose = () => {
-        this.setState({ open: false })
+        this.setState({ open: false });
+        this.props.clearErrors();
     }
 
     render() {
@@ -113,8 +115,8 @@ class PostDialog extends Component {
                     </MyButton>
                     <span>{commentCount} comments</span>
                 </Grid>
-                {/* TODO  comment input */}
                 <hr className={classes.visibleSeparator}/>
+                <CommentForm postId={postId}/>
                 <Comments comments={comments} />
             </Grid> 
         )
@@ -145,6 +147,7 @@ class PostDialog extends Component {
 }
 
 PostDialog.propTypes = {
+    clearErrors: PropTypes.func.isRequired,
     getPost: PropTypes.func.isRequired,
     postId: PropTypes.string.isRequired,
     userHandle: PropTypes.string.isRequired,
@@ -157,7 +160,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-    getPost
+    getPost,
+    clearErrors
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(PostDialog));
