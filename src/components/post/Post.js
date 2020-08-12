@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 import DeletePost from './DeletePost';
 import PostDialog from './PostDialog';
 import LikeButton from './LikeButton';
@@ -47,7 +47,7 @@ class Post extends Component {
                 user: { authenticated, 
                         credentials: { handle } } 
             } = this.props;
-            
+
         const deleteButton = authenticated && userHandle === handle ? (
             <DeletePost postId={postId}/>
         ) : null

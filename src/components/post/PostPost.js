@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 // redex
 import { connect } from 'react-redux';
-import { postPost, clearErrors } from '../redux/actions/dataActions';
+import { postPost, clearErrors } from '../../redux/actions/dataActions';
 
 // mui 
 import Button from '@material-ui/core/Button';
@@ -16,7 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // icons
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 
 const styles = theme => ({
     ...theme.spreadThis,
