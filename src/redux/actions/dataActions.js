@@ -117,6 +117,31 @@ export const deletePost = (postId) => (dispatch) => {
         .catch(err => console.log(err));
 }
 
+// get user detail page
+export const getUserData = (userHandle) => (dispatch) => {
+    dispatch({
+        type: LOADING_DATA
+    });
+    axios
+        .get(`/user/${userHandle}`)
+        .then(res => {
+            
+            dispatch({
+                type: SET_POSTS,
+                payload: res.data.posts
+            });
+        })
+        .catch(() => {
+            dispatch({
+                type: SET_POSTS,
+                payload: null
+            })
+        })
+
+}
+
+
+
 export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS })
 }
