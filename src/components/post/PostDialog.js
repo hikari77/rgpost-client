@@ -5,6 +5,7 @@ import MyButton from '../../util/MyButton';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import LikeButton from './LikeButton';
+import Comments from './Comments';
 
 // mui
 import Dialog from '@material-ui/core/Dialog';
@@ -25,10 +26,7 @@ import { getPost } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
-    invisibleSeparator: {
-        border: 'none',
-        margin: 4
-    },
+    
     profileImage: {
         maxWidth: 200,
         height: 200,
@@ -76,7 +74,8 @@ class PostDialog extends Component {
                     likeCount, 
                     commentCount, 
                     userImage, 
-                    userHandle
+                    userHandle,
+                    comments
                 },
                 UI: { loading }
             } = this.props;
@@ -114,6 +113,9 @@ class PostDialog extends Component {
                     </MyButton>
                     <span>{commentCount} comments</span>
                 </Grid>
+                {/* TODO  comment input */}
+                <hr className={classes.visibleSeparator}/>
+                <Comments comments={comments} />
             </Grid> 
         )
 
