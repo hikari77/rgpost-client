@@ -1,4 +1,4 @@
-import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER } from '../types';
+import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER, MARK_NOTIFICATIONS_READ } from '../types';
 
 import axios from 'axios';
 
@@ -86,3 +86,15 @@ const setAuthorizationHeader = (token) => {
     localStorage.setItem('FBIdToken', FBIdToken);
     axios.defaults.headers.common['Authorization'] = FBIdToken;
 };
+
+
+export const markNotificationsRead = (notificationsId) => (dispatch) => {
+    axios
+        .post('/notifications', notificationsId)
+        .then( res => {
+            dispatch({
+                type: MARK_NOTIFICATIONS_READ
+            })
+        })
+        .catch(err => console.log(err))
+}
